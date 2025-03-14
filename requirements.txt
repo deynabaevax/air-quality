@@ -1,7 +1,7 @@
 streamlit
 pandas
 numpy
-matplotlib
+matplotlib --no-cache-dir
 requests
 scikit-learn
 transformers
@@ -9,3 +9,5 @@ torch
 llama-cpp-python
 accelerate>=0.26.0
 plotly
+folium
+streamlit-folium
