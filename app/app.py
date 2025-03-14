@@ -7,16 +7,27 @@ import plotly.graph_objects as go
 import folium
 from streamlit_folium import folium_static
 
-st.set_page_config(page_title="Sofia Air Quality Dashboard", layout="centered")
+st.set_page_config(page_title="Sofia Air Quality", layout="centered")
 
-st.title("🌍 Sofia Air Quality")
+# Sidebar Navigation with clickable buttons
+st.sidebar.title("🔎 Navigation")
 
-# Fetch AQI data
-data = get_air_quality()
+if "page" not in st.session_state:
+    st.session_state.page = "Dashboard" 
 
-tab1, tab2 = st.tabs(["📊 Air Quality Dashboard", "🤖 AI Chat Assistant"])
+if st.sidebar.button("📊 Air Quality Dashboard"):
+    st.session_state.page = "Dashboard"
 
-with tab1:
+if st.sidebar.button("🤖 AI Chat Assistant"):
+    st.session_state.page = "Chatbot"
+
+# Opens first page
+if st.session_state.page == "Dashboard":
+    st.title("🌍 Sofia Air Quality")
+    
+    # Fetch AQI data
+    data = get_air_quality()
+
     if "error" in data:
         st.error(data["error"])
     else:
@@ -110,8 +121,8 @@ with tab1:
     folium_static(m)
     
 
-with tab2:
-    st.subheader("🤖 Air Quality AI Chatbot")
+if st.session_state.page == "Chatbot":
+    st.title("🤖 Air Quality AI Chatbot")
     st.write("💬 Ask me anything about air quality, pollution, and environmental protection!")
 
     user_input = st.text_input("Type your question here:")
