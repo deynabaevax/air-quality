@@ -67,6 +67,17 @@ if st.session_state.page == "Dashboard":
 
     st.plotly_chart(fig, use_container_width=True)
     
+    with st.expander("ℹ️ See more information"):
+        st.subheader("🫁 Understanding PM10 & PM2.5")
+        st.info("""
+        - **PM10** refers to large particles (e.g., dust, pollen, mold) that can cause throat and nose irritation.
+        - **PM2.5** are fine particles (from car emissions, industrial pollution) that **can enter the lungs** and affect breathing.
+        - **How to reduce exposure?** 
+            - 🚶 Walk in parks with more trees.
+            - 🏠 Keep windows closed on high AQI days.
+            - 😷 Wear a mask if pollution is high.
+        """)
+        # 📌 Add easy-to-understand AQI information
     
     st.subheader("🌡 Air Quality Index Gauge")
 
@@ -94,14 +105,25 @@ if st.session_state.page == "Dashboard":
     st.plotly_chart(fig_gauge)
     
     with st.expander("ℹ️ See more information"):
-        st.markdown("""
-            ### AQI Levels Explained:
-            - 🟢 **0-50 (Good)** - Air quality is safe.
-            - 🟡 **51-100 (Moderate)** - Air is acceptable, but some pollutants might be a concern.
-            - 🟠 **101-150 (Unhealthy for Sensitive Groups)** - Older adults & kids should limit outdoor activities.
-            - 🔴 **151-200 (Unhealthy)** - Everyone may experience health effects.
-            - 🟣 **201-300 (Very Unhealthy)** - Health warnings of emergency conditions.
-            """)
+        # 📌 Add easy-to-understand AQI information
+        st.markdown("### 🧐 What does AQI mean?")
+        st.info("""
+        - **AQI (Air Quality Index)** measures how clean or polluted the air is.
+        - The higher the AQI, the worse the air quality.
+        - Air pollution can cause breathing issues, especially for children, older adults, and people with asthma.
+        """)
+
+        # 🟢 AQI Health Effects Table
+        st.markdown("### 🚦 AQI Health Effects & Actions")
+        st.write("""
+        | AQI Level | Health Concern | Recommended Actions |
+        |-----------|---------------|---------------------|
+        | 🟢 **0-50 (Good)** | Air quality is good & safe | No action needed ✅ |
+        | 🟡 **51-100 (Moderate)** | Air is acceptable, but some pollutants might be a concern | Sensitive people should avoid prolonged outdoor activities 🤧 |
+        | 🟠 **101-150 (Unhealthy for Sensitive Groups)** | Older adults & kids should limit outdoor activities | Reduce outdoor activities, wear a mask 😷 |
+        | 🔴 **151-200 (Unhealthy)** | Health effects may be felt by everyone | Avoid outdoor exercise, stay indoors 🚷 |
+        | 🟣 **201-300 (Very Unhealthy)** | Health warnings for all individuals | Everyone should stay indoors, wear a mask 😷 |
+        """)
      
 
     st.subheader("🌍 Real-Time Air Quality Map")
@@ -123,11 +145,19 @@ if st.session_state.page == "Dashboard":
 
 if st.session_state.page == "Chatbot":
     st.title("🤖 Air Quality AI Chatbot")
-    st.write("💬 Ask me anything about air quality, pollution, and environmental protection!")
+    st.write("💬 **Ask me anything about air quality, pollution, and how to protect your health!**")
+    
+    st.info("""
+        **Try asking:**
+        - "_What does AQI mean?_"
+        - "_How can I reduce my exposure to air pollution?_"
+        - "_Why is PM2.5 dangerous?_"
+        - "_What should I do on a high pollution day?_"
+    """)
 
     user_input = st.text_input("Type your question here:")
 
-    if st.button("Ask AI"):
+    if st.button("Ask 🤖"):
         if user_input.strip():
             response = ask_bot(user_input)
             st.subheader("🤖 Response:")
